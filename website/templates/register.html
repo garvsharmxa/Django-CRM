@@ -1,7 +1,29 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
+{% block content %}
 
-{% block content%}
+<div class="col-md-6 offset-md-3">
+  <h1 style="color: #ffcc00;">Register</h1> <!-- Retro yellow color -->
+  <br/>
 
-<h1>Register User</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
+    {% if form.errors %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #ffcc00; color: #8b4513;"> <!-- Retro yellow background, Retro brown text -->
+        Your Form Has Errors
+        {% for field in form %}
+          {% if field.errors %}
+            {{ field.errors }}
+          {% endif %}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
 
-{% endblock%}
+    {{ form.as_p }}
+
+    <br/>
+    <button type="submit" class="btn btn-secondary" style="background-color: #8b4513;">Register</button> <!-- Retro brown button color -->
+  </form>
+</div>
+
+{% endblock %}
